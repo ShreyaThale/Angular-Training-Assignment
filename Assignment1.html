@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Document</title>
+    <style>
+        .form-wrapper {
+            display: grid;
+            place-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container w-100 d-flex justify-content-center align-items-center my-4">
+        <form>
+            <h1 class="text-center">Registration Form</h1>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <div class="d-flex ">
+                    <input type="text" class="form-control" id="name" placeholder="Enter your name" style="width:400px;">
+                    <span class="text-danger" id="nameValidation"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <div class="d-flex ">
+                    <input type="text" class="form-control" id="email" placeholder="Enter email" style="width:400px;">
+                    <span class="text-danger" id="emailValidation"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <div class="d-flex">
+                    <input type="password" class="form-control" id="pass" placeholder="Enter password" style="width:400px;">
+                    <span class="text-danger" id="passValidation"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="cpassword">Confirm Password:</label>
+                <div class="d-flex">
+                    <input type="password" class="form-control" id="cpass" placeholder="Enter confirm password" style="width:400px;">
+                    <span class="text-danger" id="cpassValidation"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email">Gender:</label><br />
+                    <input type="radio" id="male" value="male">
+                    <label for="male">Male</label> 
+                    <input type="radio" id="female" value="female">
+                    <label for="female">Female</label> 
+                <span class="text-danger" id="genderValidation" style="margin-left: 270px;"></span>
+            </div>
+            <div class="form-group">
+                <label for="hobbies">Hobbies:</label><br/>
+                <input type="checkbox" id="cricket">
+                <label for="criclet">Cricket</label>
+                <input type="checkbox" id="badminton">
+                <label for="badminton">Badminton</label>
+                <input type="checkbox" id="football">
+                <label for="football">Football</label>
+                <span class="text-danger" id="hobbyValidation" style="margin-left: 152px;"></span>
+            </div>
+            <div class="form-group">
+                <label for="remarks">Remarks:</label>
+                <div class="d-flex">
+                    <textarea class="form-control" id="remarks" style="width:400px;" placeholder="Enter remark"></textarea>
+                    <span class="text-danger" id="remarksValidation"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="city">City:</label>
+                <div class="d-flex">
+                    <select id="city" class="form-control" style="width:400px;">
+                        <option value="">Select a city</option>
+                        <option value="panvel">Panvel</option>
+                        <option value="thane">Thane</option>
+                        <option value="rabale">Rabale</option>
+                        <option value="ghansoli">Ghansoli</option>
+                    </select>
+                    <span class="text-danger" id="cityValidation"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="button" id="submit" value="Submit" onclick="Submit()">
+            </div>
+        </form>
+        </div>
+    </div>
+
+    <script>
+        function Submit(){
+            var name = document.getElementById('name').value;
+            var regName = /\d+$/g; 
+
+            if(name == "" || name == null)  
+            {
+                document.getElementById('nameValidation').innerHTML = "This field is required";
+            }
+            else if(regName.test(name))
+            {
+                document.getElementById('nameValidation').innerHTML = "Name field should contain alphabets only";
+            }
+            else
+            {
+                document.getElementById('nameValidation').innerHTML = "";
+            }
+
+            var email = document.getElementById('email').value;
+            var regEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+            if(email == ""  || email == null)
+            {
+                document.getElementById('emailValidation').innerHTML = "This field is required";
+            }
+            else if(!regEmail.test(email))
+            {
+                document.getElementById('emailValidation').innerHTML = "Please enter a valid Email";
+            }
+            else
+            {
+                document.getElementById('emailValidation').innerHTML = "";
+            }
+
+            var password = document.getElementById('pass').value;
+            if(password == "" || password == null){
+                document.getElementById('passValidation').innerHTML = "This field is required";
+            }
+            else if(password.length < 8 || password.length > 20)
+            {
+                document.getElementById('passValidation').innerHTML = "Please enter a valid password";
+            }
+            else{
+                document.getElementById('passValidation').innerHTML = "";
+            }
+
+            var confirmPass = document.getElementById('cpass').value;
+            if(confirmPass == "" || confirmPass == null){
+                document.getElementById('cpassValidation').innerHTML = "This field is reuired";
+            }
+            else if(password != confirmPass){
+                document.getElementById('cpassValidation').innerHTML = "Password & Confirm Password does not match";
+            }
+            else{
+                document.getElementById('cpassValidation').innerHTML = "";
+            }
+
+
+            if(document.getElementById('male').checked == false && document.getElementById('male').checked == false)
+            {
+                document.getElementById('genderValidation').innerHTML = "This field is required";
+            }    
+            else{
+                document.getElementById('genderValidation').innerHTML = "";
+            }
+            
+            if(document.getElementById('cricket').checked == false && document.getElementById('badminton').checked == false && document.getElementById('football').checked == false)
+            {
+                document.getElementById('hobbyValidation').innerHTML = "This field is required";
+            }    
+            else{
+                document.getElementById('hobbyValidation').innerHTML = "";
+            }
+
+            var remarks = document.getElementById('remarks').value;
+            if(remarks == "" || remarks == null)
+            {
+                document.getElementById('remarksValidation').innerHTML = "This field is required";
+            }
+            else if(remarks.length > 20)
+            {
+                document.getElementById('remarksValidation').innerHTML = "Maximun length of remarks field should be 20";
+            }
+            else
+            {
+                document.getElementById('remarksValidation').innerHTML = "";
+            }
+
+            var city = document.getElementById('city').value;
+            if(city == ""){
+                document.getElementById('cityValidation').innerHTML = "This field is required";
+            }
+            else{
+                document.getElementById('cityValidation').innerHTML = "";
+            }
+
+        }
+
+    </script>
+</body>
+</html>
